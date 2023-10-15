@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Un lienzo para animar</title>
+</head>
+
+<body>
+ <section align ="center">  
+<h1>Haz clic para cambiar el color del lienzo</h1>
+
+    <canvas id="canvas" width="400" height="400"></canvas>
+</section>
+
+<section align ="center">
+    <p id="mensaje"></p>
+
+</section>
+    <script>
+
+   
+   var canvas = document.getElementById("canvas");
+    var ctx = canvas.getContext("2d");
+      
+    var posicion = 50;    
+    var largo = 150;
+    var ancho = 0;    
+    setInterval(function () {
+        ctx.clearRect(0, 0, 400, 400);
+        ctx.fillRect(posicion,50 , largo, ancho);
+        
+        posicion++;
+        largo++;
+        ancho++;
+        var elementoMensaje = document.getElementById('mensaje');
+var texto = "Las dimensiones son: " + largo +"Pxs. de largo y " + ancho + " Pxs. de ancho."; 
+
+elementoMensaje.textContent = texto;
+        if (largo > 400 || ancho > 400){
+            largo= 0;
+            ancho=0
+            posicion = 0;
+        }
+    }, 30);
+
+    var Canvas = document.getElementById('canvas');
+    Canvas.addEventListener('click', function() {
+    // Genera un color aleatorio
+    var colorAleatorio = generarColorAleatorio();
+
+    // Cambia el color de fondo de canvas
+    canvas.style.backgroundColor = colorAleatorio;
+});
+// Función para generar un color aleatorio en formato hexadecimal
+function generarColorAleatorio() {
+    var letras = '0123456789ABCDEF';
+    var color = '#';
+    for (var i = 0; i < 6; i++) {
+        color += letras[Math.floor(Math.random() * 16)];
+    }
+    return color;
+}
+
+   </script>
+</body>
+</html>
